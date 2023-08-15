@@ -44,6 +44,25 @@ public class SaveDataManager : MonoBehaviour
             field.Reset();
             field.Create(saveData.mapData.map);
             PlayerMovement playerMove = player.GetComponent<PlayerMovement>();
+            playerMove.SetPosition(saveData.playerData.grid.x, saveData.playerData.grid.z);
+            playerMove.SetDirection(saveData.playerData.direction);
+        }
+    }
+
+    void Update()
+    {
+        if (Input.anyKeyDown)
+        {
+            if (Input.GetKeyDown("s"))
+            {
+                Save();
+                Message.add("セーブしました！");
+            }
+            if (Input.GetKeyDown("l"))
+            {
+                Load();
+                Message.add("ロードしました！");
+            }
         }
     }
 }

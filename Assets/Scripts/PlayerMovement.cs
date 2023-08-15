@@ -91,4 +91,14 @@ public class PlayerMovement : MonoBehaviour
         direction = d;
         transform.rotation = DirUtil.DirToRotation(d);
     }
+
+    /**
+    * 指定したグリッド座標に合わせて位置を変更する
+    */
+    public void SetPosition(int xgrid, int zgrid)
+    {
+        grid.x = xgrid;
+        grid.z = zgrid;
+        transform.position = new Vector3(Field.ToWorldX(xgrid), 0, Field.ToWorldZ(zgrid));
+    }
 }

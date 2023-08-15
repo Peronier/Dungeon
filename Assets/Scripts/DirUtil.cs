@@ -101,6 +101,7 @@ public class DirUtil
     */
     public static Pos2D GetNewGrid(Pos2D position, EDir d)
     {
+
         Pos2D newP = new Pos2D();
         newP.x = position.x;
         newP.z = position.z;
