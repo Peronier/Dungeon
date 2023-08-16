@@ -31,9 +31,9 @@ public class LoadFieldMap : MonoBehaviour
             int w = 0, h = 0;
             foreach(var layer in map.Elements("layer"))
             {
-                switch (layer.Attribute("id").Value)
+                switch (int.Parse(layer.Attribute("id").Value))
                 {
-                    case "1":
+                    case 1:
                         string[] sData = (layer.Element("data").Value).Split(',');
                         w = int.Parse(layer.Attribute("width").Value);
                         h = int.Parse(layer.Attribute("height").Value);
