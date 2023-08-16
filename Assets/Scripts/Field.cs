@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
-    public GameObject floor;
-    public GameObject wall;
+    public GameObject Floor;
+    public GameObject Wall;
 
     private Array2D map;
     private const float oneTile = 1.0f;
     private const float floorSize = 10.0f / oneTile;
-
-    void Start()
-    {
-        Array2D mapdata = new Array2D(10, 10);
-        mapdata.Set(1, 1, 1);
-        Create(mapdata);
-    }
 
     /**
     * グリッド座標をワールド座標に変換
@@ -45,29 +38,29 @@ public class Field : MonoBehaviour
     }
 
     /**
-* マップデータの生成
-*/
+    * マップデータの生成
+    */
     public void Create(Array2D mapData)
     {
         map = mapData;
         float floorW = map.width / floorSize;
         float floorH = map.height / floorSize;
-        floor.transform.localScale = new Vector3(floorW, 1, floorH);
+        Floor.transform.localScale = new Vector3(floorW, 1, floorH);
         float floorX = (map.width - 1) / 2.0f * oneTile;
         float floorZ = (map.height - 1) / 2.0f * oneTile;
-        floor.transform.position = new Vector3(floorX, 0, floorZ);
+        Floor.transform.position = new Vector3(floorX, 0, floorZ);
         for (int z = 0; z < map.height; z++)
         {
             for (int x = 0; x < map.width; x++)
             {
                 if (map.Get(x, z) > 0)
                 {
-                    GameObject block = Instantiate(wall);
+                    GameObject block = Instantiate(Wall);
                     float xBlock = ToWorldX(x);
                     float zBlock = ToWorldZ(z);
                     block.transform.localScale = new Vector3(oneTile, 2, oneTile);
                     block.transform.position = new Vector3(xBlock, 1, zBlock);
-                    block.transform.SetParent(floor.transform.GetChild(0));
+                    block.transform.SetParent(Floor.transform.GetChild(0));
                 }
             }
         }
@@ -78,7 +71,7 @@ public class Field : MonoBehaviour
     */
     public void Reset()
     {
-        Transform walls = floor.transform.GetChild(0);
+        Transform walls = Floor.transform.GetChild(0);
         for (int i = 0; i < walls.childCount; i++)
         {
             Destroy(walls.GetChild(i).gameObject);
