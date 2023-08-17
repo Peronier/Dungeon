@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
         float t = frame / complementFrame;
         float newX = px1 + (px2 - px1) * t;
         float newZ = pz1 + (pz2 - pz1) * t;
-        transform.position = new Vector3(newX, 0, newZ);
+        transform.position = new Vector3(newX, 0, newZ); print("êVÇµÇ¢newZÇÕ" + newZ);
         animator.SetFloat(hashSpeedPara, speed, speedDampTime, Time.deltaTime);
         if (complementFrame <= frame)
         {

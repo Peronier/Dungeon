@@ -7,6 +7,7 @@ public class LoadFieldMap : MonoBehaviour
 {
     public string mapName;
     public Field field;
+    public PlayerMovement player;
 
     void Start()
     {
@@ -44,6 +45,28 @@ public class LoadFieldMap : MonoBehaviour
                             {
                                 data.Set(x, z, int.Parse(sData[ToMirrorX(x, w) + z * w]) - 1);
                             }
+                        }
+                        break;
+                }
+            }
+            foreach(var objgp in map.Elements("objectgroup"))
+            {
+                switch (int.Parse(objgp.Attribute("id").Value))
+                {
+                    case 2:
+                        foreach(var obj in objgp.Elements("object"))
+                        {
+                            switch (obj.Attribute("name").Value)
+                            {
+                                case "Player":
+                                    int x = int.Parse(obj.Attribute("x").Value);
+                                    int z = int.Parse(obj.Attribute("y").Value);
+                                    int pw = int.Parse(obj.Attribute("width").Value);
+                                    int ph = int.Parse(obj.Attribute("height").Value);
+                                    player.SetPosition(ToMirrorX(x / pw, w), z / ph);
+                                    break;
+                            }
+                            break;
                         }
                         break;
                 }
