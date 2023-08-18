@@ -7,7 +7,7 @@ public class LoadFieldMap : MonoBehaviour
 {
     public string mapName;
     public Field field;
-    public ActorMovement player;
+    public PlayerMovement player;
 
     void Start()
     {
@@ -43,7 +43,7 @@ public class LoadFieldMap : MonoBehaviour
                         {
                             for (int x = 0; x < w; x++)
                             {
-                                data.Set(x, z, int.Parse(sData[ToMirrorX(x, w) + z * w]));
+                                data.Set(x, z, int.Parse(sData[ToMirrorX(x, w) + z * w]) - 1);
                             }
                         }
                         break;
@@ -63,7 +63,7 @@ public class LoadFieldMap : MonoBehaviour
                                     int z = int.Parse(obj.Attribute("y").Value);
                                     int pw = int.Parse(obj.Attribute("width").Value);
                                     int ph = int.Parse(obj.Attribute("height").Value);
-                                    player.SetActorPosition(ToMirrorX(x / pw, w), z / ph);
+                                    player.SetPosition(ToMirrorX(x / pw, w), z / ph);
                                     break;
                             }
                             break;

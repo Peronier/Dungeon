@@ -19,7 +19,7 @@ public class SaveDataManager : MonoBehaviour
      */
     private void Save()
     {
-        ActorMovement playerMove = player.GetComponent<ActorMovement>();
+        PlayerMovement playerMove = player.GetComponent<PlayerMovement>();
         ActorSaveData playerSaveData = new ActorSaveData();
         playerSaveData.grid = new Pos2D();
         playerSaveData.grid.x = playerMove.grid.x;
@@ -43,9 +43,9 @@ public class SaveDataManager : MonoBehaviour
             JsonUtility.FromJsonOverwrite(data, saveData);
             field.Reset();
             field.Create(saveData.mapData.map);
-            ActorMovement playerMove = player.GetComponent<ActorMovement>();
-            playerMove.SetActorPosition(saveData.playerData.grid.x, saveData.playerData.grid.z);
-            playerMove.SetActorDirection(saveData.playerData.direction);
+            PlayerMovement playerMove = player.GetComponent<PlayerMovement>();
+            playerMove.SetPosition(saveData.playerData.grid.x, saveData.playerData.grid.z);
+            playerMove.SetDirection(saveData.playerData.direction);
         }
     }
 

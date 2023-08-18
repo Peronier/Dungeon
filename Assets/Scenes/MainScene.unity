@@ -225,17 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f5eca93d196c8741a64f1cfccc486d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &308020287 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4051209140201832441, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
-  m_PrefabInstance: {fileID: 1456163549}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 308020276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802f2b30be02a554b837261ad404aafd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &592171847 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7241315084891656887, guid: 67526ff3c547f434fa41b03978cf1c59, type: 3}
@@ -782,51 +771,6 @@ MonoBehaviour:
   text: {fileID: 8139681095908334218, guid: f12fcecae38d310409477c95dd8ad830, type: 3}
   maxPerFrameH: 0.5
   maxPerFrameV: 1
---- !u!1 &1104208327
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1104208329}
-  - component: {fileID: 1104208328}
-  m_Layer: 0
-  m_Name: SequenceManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1104208328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104208327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6365a59450ec0304aa7c8b191d7857fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAction: {fileID: 308020287}
---- !u!4 &1104208329
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1104208327}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1456163549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -852,7 +796,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2497547024920583785, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.7071068
+      value: -0.00000004371139
       objectReference: {fileID: 0}
     - target: {fileID: 2497547024920583785, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
       propertyPath: m_LocalRotation.x
@@ -860,7 +804,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2497547024920583785, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2497547024920583785, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
       propertyPath: m_LocalRotation.z
@@ -886,18 +830,6 @@ PrefabInstance:
       propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4051209140201832441, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
-      propertyPath: actorMovement
-      value: 
-      objectReference: {fileID: 6267846503851051028, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
-    - target: {fileID: 4051209140201832441, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
-      propertyPath: playerOperation
-      value: 
-      objectReference: {fileID: 1312881377340189957, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
-    - target: {fileID: 6267846503851051028, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
-      propertyPath: speed
-      value: 0.9
-      objectReference: {fileID: 0}
     - target: {fileID: 6267846503851051028, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
       propertyPath: grid.x
       value: 0
@@ -910,14 +842,5 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 308020279}
-    - target: {fileID: 6267846503851051028, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
-      propertyPath: maxPerFrame
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6267846503851051028, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
-      propertyPath: speedDampTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 0}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bf5dc118163df941b3b481e611f67b8, type: 3}
