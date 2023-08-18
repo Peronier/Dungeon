@@ -2,7 +2,7 @@ using UnityEngine;
 using static DirUtil;
 using static Field;
 
-public class PlayerMovement : MonoBehaviour
+public class ActorMovement : MonoBehaviour
 {
     public Animator animator;
     public EDir direction = EDir.Up;
@@ -13,36 +13,45 @@ public class PlayerMovement : MonoBehaviour
 
     public Pos2D grid = new Pos2D();
 
-    public float maxPerFrame = 1.67f;
+    public float maxPerFrame = 0.8f;
     private float complementFrame;
 
     private int currentFrame = 0;
     private Pos2D newGrid = null;
 
-    // Start is called before the first frame update
+    public bool isMoving;
+
     void Start()
     {
         complementFrame = maxPerFrame / Time.deltaTime;
+        newGrid = grid;
     }
 
-    // Update is called once per frame
-    private void Update()
+    /**
+     * 歩行中
+     */
+    public EAct Walking()
     {
-        if (currentFrame == 0)
+        if(grid.Equals(newGrid) && currentFrame == 0)
         {
-            EDir d = KeyToDir();
-            if (d == EDir.Pause)
-                animator.SetFloat(hashSpeedPara, 0.0f, speedDampTime, Time.deltaTime);
-            else
-            {
-                direction = d;
-                Message.add(direction.ToString());
-                transform.rotation = DirToRotation(direction);
-                newGrid = DirUtil.Move(GetComponentInParent<Field>(), grid, direction);
-                grid = Move(grid, newGrid, ref currentFrame);
-            }
+            animator.SetFloat(hashSpeedPara, 0.0f, speedDampTime, Time.deltaTime);
+            return EAct.MoveEnd;
         }
-        else grid = Move(grid, newGrid, ref currentFrame);
+        print(grid + "," + newGrid + "," + currentFrame);
+        grid = Move(grid, newGrid, ref currentFrame);
+        print("移動中");
+        return EAct.Moving;
+    }
+
+    /**
+     * アニメーションの停止
+     */
+    public void StopAnimation()
+    {
+        if(animator.GetFloat(hashSpeedPara) > 0.0f)
+        {
+            animator.SetFloat(hashSpeedPara, 0.0f, speedDampTime, Time.deltaTime);
+        }
     }
 
     /**
@@ -58,7 +67,8 @@ public class PlayerMovement : MonoBehaviour
         float t = frame / complementFrame;
         float newX = px1 + (px2 - px1) * t;
         float newZ = pz1 + (pz2 - pz1) * t;
-        transform.position = new Vector3(newX, 0, newZ); print("新しいnewZは" + newZ);
+        print(newX + "と" + newZ);
+        transform.position = new Vector3(newX, 0, newZ);
         animator.SetFloat(hashSpeedPara, speed, speedDampTime, Time.deltaTime);
         if (complementFrame <= frame)
         {
@@ -86,7 +96,7 @@ public class PlayerMovement : MonoBehaviour
     /**
      * 指定した向きに合わせて回転ベクトルも変更する
      */
-    public void SetDirection(EDir d)
+    public void SetActorDirection(EDir d)
     {
         direction = d;
         transform.rotation = DirUtil.DirToRotation(d);
@@ -95,10 +105,24 @@ public class PlayerMovement : MonoBehaviour
     /**
     * 指定したグリッド座標に合わせて位置を変更する
     */
-    public void SetPosition(int xgrid, int zgrid)
+    public void SetActorPosition(int xgrid, int zgrid)
     {
         grid.x = xgrid;
         grid.z = zgrid;
         transform.position = new Vector3(Field.ToWorldX(xgrid), 0, Field.ToWorldZ(zgrid));
+        newGrid = grid;
+    }
+
+    /**
+     * 歩行アニメーションの開始
+     */
+    public void StartWalking()
+    {
+        isMoving = true;
+        if (currentFrame > 0 && isMoving) return;
+        Message.add(direction.ToString());
+        newGrid = DirUtil.Move(GetComponentInParent<Field>(), grid, direction);
+        grid = Move(grid, newGrid, ref currentFrame);
+        isMoving = false;
     }
 }

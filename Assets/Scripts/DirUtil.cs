@@ -128,9 +128,8 @@ public class DirUtil
         Pos2D newP = GetNewGrid(position, d);
         if (field.IsCollide(newP.x, newP.z))
         {
-            Debug.Log("•Ç‚Å‚·");
-            return newP;
+            return position;
         }
-        return position;
+        return newP;
     }
 }

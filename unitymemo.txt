@@ -1,6 +1,6 @@
 unity 参考サイト
 グリッド移動ができない
-https://note.com/frabbit_mbp/n/n401e860b1382
+https://note.com/frabbit_mbp/n/na467fb0c20d8
 もっさり参考
 https://3dunity.org/game-create-lesson/roguelike-game/
 2Dローグライク
