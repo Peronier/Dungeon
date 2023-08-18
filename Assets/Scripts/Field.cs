@@ -6,6 +6,8 @@ public class Field : MonoBehaviour
 {
     public GameObject Floor;
     public GameObject Wall;
+    public ActorMovement playerMovement;
+    public ActorMovement enemies;
 
     private Array2D map;
     private const float oneTile = 1.0f;
@@ -83,7 +85,16 @@ public class Field : MonoBehaviour
     */
     public bool IsCollide(int xgrid, int zgrid)
     {
-        return map.Get(xgrid, zgrid) != 0;
+        if (map.Get(xgrid, zgrid) != 0) return true;
+        if (xgrid == playerMovement.newGrid.x && zgrid == playerMovement.newGrid.z)
+            return true;
+        foreach (var enemyMovement in enemies.GetComponentsInChildren<ActorMovement>())
+        {
+            print(enemyMovement.newGrid);
+            if (xgrid == enemyMovement.grid.x && zgrid == enemyMovement.grid.z)
+                return true;
+        }
+        return false;
     }
 
     public  Array2D GetMapData()

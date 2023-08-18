@@ -48,6 +48,26 @@ public class DirUtil
     }
 
     /**
+    * ランダムな向きを返す
+    */
+    public static EDir RandomDirection()
+    {
+        int dirnum = UnityEngine.Random.Range(0, 4);
+        switch (dirnum)
+        {
+            case 0:
+                return EDir.Left;
+            case 1:
+                return EDir.Up;
+            case 2:
+                return EDir.Right;
+            case 3:
+                return EDir.Down;
+        }
+        return EDir.Down;
+    }
+
+    /**
     * 引数で与えられた向きに対応する回転のベクトルを返す
     */
     public static Quaternion DirToRotation(EDir d)
@@ -128,9 +148,8 @@ public class DirUtil
         Pos2D newP = GetNewGrid(position, d);
         if (field.IsCollide(newP.x, newP.z))
         {
-            Debug.Log("壁です");
-            return newP;
+            return position;
         }
-        return position;
+        return newP;
     }
 }

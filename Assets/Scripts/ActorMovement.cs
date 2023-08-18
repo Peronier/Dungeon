@@ -2,7 +2,7 @@ using UnityEngine;
 using static DirUtil;
 using static Field;
 
-public class PlayerMovement : MonoBehaviour
+public class ActorMovement : MonoBehaviour
 {
     public Animator animator;
     public EDir direction = EDir.Up;
@@ -17,38 +17,32 @@ public class PlayerMovement : MonoBehaviour
     private float complementFrame;
 
     private int currentFrame = 0;
-    private Pos2D newGrid = null;
+    public Pos2D newGrid = null;
 
     // Start is called before the first frame update
     void Start()
     {
         complementFrame = maxPerFrame / Time.deltaTime;
+        newGrid = grid;
     }
 
     // Update is called once per frame
-    private void Update()
+    public void Update()
     {
-        if (currentFrame == 0)
+        if (grid.Equals(newGrid) && currentFrame == 0)
         {
-            EDir d = KeyToDir();
-            if (d == EDir.Pause)
-                animator.SetFloat(hashSpeedPara, 0.0f, speedDampTime, Time.deltaTime);
-            else
-            {
-                direction = d;
-                Message.add(direction.ToString());
-                transform.rotation = DirToRotation(direction);
-                newGrid = DirUtil.Move(GetComponentInParent<Field>(), grid, direction);
-                grid = Move(grid, newGrid, ref currentFrame);
-            }
+            animator.SetFloat(hashSpeedPara, 0.0f, speedDampTime, Time.deltaTime);
         }
-        else grid = Move(grid, newGrid, ref currentFrame);
+        else
+        {
+            grid = Move(grid, newGrid, ref currentFrame);
+        }
     }
 
     /**
     * 補完で計算して進む
     */
-    private Pos2D Move(Pos2D currentPos, Pos2D newPos, ref int frame)
+    public Pos2D Move(Pos2D currentPos, Pos2D newPos, ref int frame)
     {
         float px1 = ToWorldX(currentPos.x);
         float pz1 = ToWorldZ(currentPos.z);
@@ -100,5 +94,16 @@ public class PlayerMovement : MonoBehaviour
         grid.x = xgrid;
         grid.z = zgrid;
         transform.position = new Vector3(Field.ToWorldX(xgrid), 0, Field.ToWorldZ(zgrid));
+    }
+
+    /**
+    * 歩行アニメーション開始
+    */
+    public void Walk()
+    {
+        if (currentFrame > 0) return;
+        Message.add(direction.ToString());
+        newGrid = DirUtil.Move(GetComponentInParent<Field>(), grid, direction);
+        grid = Move(grid, newGrid, ref currentFrame);
     }
 }
