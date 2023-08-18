@@ -5,6 +5,8 @@ https://note.com/frabbit_mbp/n/na467fb0c20d8
 https://3dunity.org/game-create-lesson/roguelike-game/
 2Dローグライク
 https://www.popii33.com/roguelikegame1/
+敵AIの参考資料
+https://www.last-dragon.work/unity/gteki.html
 
 アニメーション参考用サイト
 mixamo
