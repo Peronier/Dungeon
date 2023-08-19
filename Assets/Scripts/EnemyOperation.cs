@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyOperation : MonoBehaviour
 {
-    private int currentFrame = 0;
     public ActorMovement actorMovement;
+    public Animator animator;
+    private readonly int hashAttackPara = Animator.StringToHash("Attack");
     public Pos2D grid = new Pos2D();
     public Pos2D newGrid = null;
 
@@ -13,27 +14,45 @@ public class EnemyOperation : MonoBehaviour
     void Start()
     {
         newGrid = grid;
+        StartCoroutine("isDecideActionAI");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(currentFrame == 0)
-        {
-            RandomActionAi(ref currentFrame);
-        }
+        
+    }
 
+    private IEnumerator isDecideActionAI()
+    {
+        yield return new WaitForSeconds(2.0f);
+        RandomActionAI();
     }
 
     /**
-     * ランダムな行動AI
+     * 行動用AI
      */
-    private void RandomActionAi(ref int frame)
+    private void RandomActionAI()
     {
         actorMovement.SetDirection(DirUtil.RandomDirection());
-        if(Random.Range(0, 2) > 0)
+        switch(Random.Range(0, 4))
         {
-            actorMovement.Walk();
+            case 0:
+                actorMovement.Walk();
+                break;
+
+            case 1:
+                animator.SetTrigger(hashAttackPara);
+                break;
+
+            case 2:
+                actorMovement.Walk();
+                break;
+
+            case 3:
+                break;
+
         }
+        StartCoroutine("isDecideActionAI");
     }
 }

@@ -8,6 +8,7 @@ public class LoadFieldMap : MonoBehaviour
     public string mapName;
     public Field field;
     public ActorMovement player;
+    public ActorMovement enemy;
 
     void Start()
     {
@@ -64,6 +65,23 @@ public class LoadFieldMap : MonoBehaviour
                                     int pw = int.Parse(obj.Attribute("width").Value);
                                     int ph = int.Parse(obj.Attribute("height").Value);
                                     player.SetPosition(ToMirrorX(x / pw, w), z / ph);
+                                    break;
+                            }
+                            break;
+                        }
+                        break;
+
+                    case 3:
+                        foreach (var obj in objgp.Elements("object"))
+                        {
+                            switch (obj.Attribute("name").Value)
+                            {
+                                case "Enemy":
+                                    int x = int.Parse(obj.Attribute("x").Value);
+                                    int z = int.Parse(obj.Attribute("y").Value);
+                                    int pw = int.Parse(obj.Attribute("width").Value);
+                                    int ph = int.Parse(obj.Attribute("height").Value);
+                                    enemy.SetPosition(ToMirrorX(x / pw, w), z / ph);
                                     break;
                             }
                             break;
